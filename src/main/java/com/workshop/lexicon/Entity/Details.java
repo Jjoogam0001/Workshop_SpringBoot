@@ -1,9 +1,12 @@
 package com.workshop.lexicon.Entity;
 
+import org.apache.tomcat.jni.Time;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Details")
@@ -21,8 +24,7 @@ public class Details {
     public Details() {
     }
 
-    public Details( String email, String name, LocalDate birthdate) {
-
+    public Details(String email, String name, LocalDate birthdate) {
         this.email = email;
         this.name = name;
         this.birthdate = birthdate;

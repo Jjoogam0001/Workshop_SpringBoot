@@ -3,6 +3,7 @@ package com.workshop.lexicon.Entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class BookLoan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private Integer loadId;
-    private LocalDateTime loanDate;
+    private LocalDate loanDate;
     private boolean returned;
     @ManyToOne(
             cascade = CascadeType.ALL,
@@ -32,7 +33,7 @@ public class BookLoan {
     public BookLoan() {
     }
 
-    public BookLoan( LocalDateTime loanDate, boolean returned, AppUser borrower, Book book) {
+    public BookLoan(LocalDate loanDate, boolean returned, AppUser borrower, Book book) {
         this.loanDate = loanDate;
         this.returned = returned;
         this.borrower = borrower;
@@ -47,11 +48,11 @@ public class BookLoan {
         this.loadId = loadId;
     }
 
-    public LocalDateTime getLoanDate() {
+    public LocalDate getLoanDate() {
         return loanDate;
     }
 
-    public void setLoanDate(LocalDateTime loanDate) {
+    public void setLoanDate(LocalDate loanDate) {
         this.loanDate = loanDate;
     }
 
@@ -79,18 +80,7 @@ public class BookLoan {
         this.book = book;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BookLoan bookLoan = (BookLoan) o;
-        return loadId == bookLoan.loadId && returned == bookLoan.returned && loanDate.equals(bookLoan.loanDate) && borrower.equals(bookLoan.borrower) && book.equals(bookLoan.book);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(loadId, loanDate, returned, borrower, book);
-    }
 
     @Override
     public String toString() {

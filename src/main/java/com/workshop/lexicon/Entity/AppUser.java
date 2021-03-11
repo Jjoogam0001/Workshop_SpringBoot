@@ -3,6 +3,8 @@ package com.workshop.lexicon.Entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,7 +17,7 @@ public class AppUser {
     @Column(unique = true)
     private String username;
     private String password;
-    private LocalDateTime localTime;
+    private LocalDate localTime;
     @OneToOne(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
@@ -26,7 +28,7 @@ public class AppUser {
     public AppUser() {
     }
 
-    public AppUser( String username, String password, LocalDateTime localTime, Details userDetails) {
+    public AppUser(String username, String password, LocalDate localTime, Details userDetails) {
         this.username = username;
         this.password = password;
         this.localTime = localTime;
@@ -93,7 +95,7 @@ public class AppUser {
      *
      * @return localTime
      */
-    public LocalDateTime getLocalTime() {
+    public LocalDate getLocalTime() {
         return this.localTime;
     }
 
@@ -102,7 +104,7 @@ public class AppUser {
      *
      * @param localTime
      */
-    public void setLocalTime(LocalDateTime localTime) {
+    public void setLocalTime(LocalDate localTime) {
         this.localTime = localTime;
     }
 

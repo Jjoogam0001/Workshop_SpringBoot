@@ -1,9 +1,8 @@
 package com.workshop.lexicon.Service;
 
-import com.workshop.lexicon.Data.AppUserDao;
-import com.workshop.lexicon.Data.BookDao;
-import com.workshop.lexicon.Entity.AppUser;
-import com.workshop.lexicon.Entity.Book;
+import com.workshop.lexicon.Data.AuthorDao;
+import com.workshop.lexicon.Data.DetailsDao;
+import com.workshop.lexicon.Entity.Author;
 import com.workshop.lexicon.Entity.Details;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,15 +10,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
-
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
@@ -27,19 +26,22 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Transactional
 @DirtiesContext
 
-class AppUserDaoImplTest {
+class DetailsDaoImplTest {
 
     @Autowired
-    private AppUserDao testObject;
+    private DetailsDao testObject;
     @Autowired private TestEntityManager em;
 
-    private AppUser persistedUser;
+    private Details persistedDetails;
+
+
+
 
     @BeforeEach
     void setUp() {
         Details details = new Details("Jjoogam@gmail.com","Martin Jjooga", LocalDate.parse("1996-09-05"));
-        AppUser unpersisted  = new AppUser("kHALED1234","nAMAGELA123",LocalDate.parse("1997-08-09"),details);
-        persistedUser = em.persistAndFlush(unpersisted);
+        persistedDetails = em.persistAndFlush(details);
+
     }
 
     @AfterEach
@@ -48,31 +50,45 @@ class AppUserDaoImplTest {
 
     }
 
+
     @Test
     void create() {
-        Details details = new Details("oogam@gmail.com","Martin", LocalDate.parse("1996-09-05"));
-        AppUser unpersisted  = new AppUser("LED1234","nAELA123",LocalDate.parse("1997-08-09"),details);
-
-
-        AppUser result = testObject.create(unpersisted);
-
+        Details details = new Details("Jjoogam@gmail.com","Martin Jjooga", LocalDate.parse("1996-09-05"));
+        Details result = testObject.create(details);
         assertNotNull(result);
-        assertNotNull(result.getUsername());
+        assertNotNull(result.getEmail());
+
+
     }
 
     @Test
     void findById() {
+        Integer detaiId = persistedDetails.getDetaildId();
+        Details result = testObject.findById(detaiId);
+        assertNotNull(result);
+        assertEquals(persistedDetails, result);
     }
 
     @Test
     void findAll() {
+        int expected = 1;
+        Collection<Details> result = testObject.findAll();
+        assertNotNull(result);
+        assertEquals(expected, result.size());
     }
 
     @Test
     void update() {
+        Details toUpdate = persistedDetails;
+        toUpdate.setName("LL COOL J");
+        Details result = testObject.update(toUpdate);
+        assertNotNull(result);
+        assertEquals("LL COOL J", result.getName());
     }
 
     @Test
     void delete() {
+        assertTrue(testObject.delete(persistedDetails.getDetaildId()));
+
     }
 }

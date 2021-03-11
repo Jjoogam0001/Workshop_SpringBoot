@@ -62,13 +62,7 @@ public class Book {
         this.maxLoanDays = maxLoanDays;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return bookId == book.bookId && maxLoanDays == book.maxLoanDays && isbn.equals(book.isbn) && title.equals(book.title);
-    }
+
 
     @Override
     public int hashCode() {
