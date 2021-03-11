@@ -1,13 +1,13 @@
 package Data;
 
 import Entity.AppUser;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Optional;
 
-public interface AppUserDao {
-    AppUser create(AppUser appUser);
-    AppUser findById(Integer appUserId);
-    Collection<AppUser> findAll();
-    AppUser update(AppUser appUser);
-    boolean delete(Integer ingredientid);
+public interface AppUserDao extends CrudRepository<AppUser,Integer> {
+    Optional<AppUser> findByEmail(String email);
+
 }

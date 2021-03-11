@@ -1,14 +1,13 @@
 package Data;
 
+import Entity.Book;
 import Entity.BookLoan;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.Collection;
+import java.util.Optional;
 
-public interface BookLoanDao {
+public interface BookLoanDao extends CrudRepository<BookLoan,Integer> {
 
-    BookLoan create(BookLoan bookLoan);
-    BookLoan findById(Integer bookloadId);
-    Collection<BookLoan> findAll();
-    BookLoan update(BookLoan bookLoan);
-    boolean delete(Integer bookloanId);
+    Optional<BookLoan> findByBookLoanById(Integer id);
 }

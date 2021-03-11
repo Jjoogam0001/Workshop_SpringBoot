@@ -1,15 +1,15 @@
 package Data;
 
+import Entity.Author;
 import Entity.Book;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.Collection;
+import java.util.Optional;
 
-public interface BookDao {
+public interface BookDao extends CrudRepository<Book,Integer> {
 
-    Book create(Book book);
-    Book findById(Book bookId);
-    Collection<Book> findAll();
-    Book update(Book book);
-    boolean delete(Book bookId);
+    Optional<Book> findByBookTitle(String name);
+
 
 }

@@ -15,7 +15,7 @@ public class Author {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(updatable = false)
-    private int authorId;
+    private Integer authorId;
     @Column(length = 255)
     private String firstName;
     @Column(length = 255)
@@ -35,18 +35,18 @@ public class Author {
     public Author() {
     }
 
-    public Author(int authorId, String firstName, String lastName, Set<Book> writtenBooks) {
+    public Author(Integer authorId, String firstName, String lastName, Set<Book> writtenBooks) {
         this.authorId = authorId;
         this.firstName = firstName;
         LastName = lastName;
         this.writtenBooks = writtenBooks;
     }
 
-    public int getAuthorId() {
+    public Integer getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(int authorId) {
+    public void setAuthorId(Integer authorId) {
         this.authorId = authorId;
     }
 
@@ -79,7 +79,7 @@ public class Author {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
-        return authorId == author.authorId && firstName.equals(author.firstName) && LastName.equals(author.LastName) && writtenBooks.equals(author.writtenBooks);
+        return authorId.equals(author.authorId) && firstName.equals(author.firstName) && LastName.equals(author.LastName) && writtenBooks.equals(author.writtenBooks);
     }
 
     @Override

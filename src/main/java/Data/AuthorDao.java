@@ -1,14 +1,15 @@
 package Data;
 
 import Entity.Author;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.Collection;
 
-public interface AuthorDao {
 
-    Author create(Author author);
-    Author findById(Integer authorId);
-    Collection<Author> findAll();
-    Author update(Author author);
-    boolean delete(Integer authorId);
+import java.util.Optional;
+
+public interface AuthorDao extends CrudRepository<Author,Integer> {
+
+
+    Optional<Author> findByAuthorName(String name);
+
 }

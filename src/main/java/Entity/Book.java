@@ -13,7 +13,7 @@ public class Book {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(updatable = false)
-    private int bookId;
+    private Integer bookId;
     @Column(length = 255)
     private String isbn;
     @Column(length = 255)
@@ -24,18 +24,18 @@ public class Book {
     public Book() {
     }
 
-    public Book(int bookId, String isbn, String title, int maxLoanDays) {
+    public Book(Integer bookId, String isbn, String title, int maxLoanDays) {
         this.bookId = bookId;
         this.isbn = isbn;
         this.title = title;
         this.maxLoanDays = maxLoanDays;
     }
 
-    public int getBookId() {
+    public Integer getBookId() {
         return bookId;
     }
 
-    public void setBookId(int bookId) {
+    public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
 
