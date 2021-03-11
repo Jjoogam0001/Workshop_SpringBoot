@@ -1,4 +1,4 @@
-package Entity;
+package com.workshop.lexicon.Entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,10 +9,9 @@ import java.time.LocalDate;
 @Table(name = "Details")
 public class Details {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-    private int detaildId;
+    private Integer detaildId;
     @Column(unique = true)
     private String email;
     @Column(length = 255)
@@ -22,8 +21,8 @@ public class Details {
     public Details() {
     }
 
-    public Details(int detaildId, String email, String name, LocalDate birthdate) {
-        this.detaildId = detaildId;
+    public Details( String email, String name, LocalDate birthdate) {
+
         this.email = email;
         this.name = name;
         this.birthdate = birthdate;
@@ -35,7 +34,7 @@ public class Details {
      *
      * @return detaildId
      */
-    public int getDetaildId() {
+    public Integer getDetaildId() {
         return this.detaildId;
     }
 
@@ -44,7 +43,7 @@ public class Details {
      *
      * @param detaildId
      */
-    public void setDetaildId(int detaildId) {
+    public void setDetaildId(Integer detaildId) {
         this.detaildId = detaildId;
     }
 

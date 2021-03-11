@@ -1,4 +1,4 @@
-package Entity;
+package com.workshop.lexicon.Entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -10,8 +10,7 @@ import java.util.Objects;
 public class Book {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private Integer bookId;
     @Column(length = 255)
@@ -24,8 +23,8 @@ public class Book {
     public Book() {
     }
 
-    public Book(Integer bookId, String isbn, String title, int maxLoanDays) {
-        this.bookId = bookId;
+    public Book(String isbn, String title, int maxLoanDays) {
+
         this.isbn = isbn;
         this.title = title;
         this.maxLoanDays = maxLoanDays;

@@ -1,4 +1,4 @@
-package Entity;
+package com.workshop.lexicon.Entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -7,21 +7,20 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "BookLoan")
+@Table(name = "book_loan")
 public class BookLoan {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-    private int loadId;
+    private Integer loadId;
     private LocalDateTime loanDate;
     private boolean returned;
     @ManyToOne(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name = "AppUser_appUser_id")
+    @JoinColumn(name = "app_user_app_user_id")
     private AppUser borrower;
     @ManyToOne(
             cascade = CascadeType.ALL,
@@ -33,19 +32,18 @@ public class BookLoan {
     public BookLoan() {
     }
 
-    public BookLoan(int loadId, LocalDateTime loanDate, boolean returned, AppUser borrower, Book book) {
-        this.loadId = loadId;
+    public BookLoan( LocalDateTime loanDate, boolean returned, AppUser borrower, Book book) {
         this.loanDate = loanDate;
         this.returned = returned;
         this.borrower = borrower;
         this.book = book;
     }
 
-    public int getLoadId() {
+    public Integer getLoadId() {
         return loadId;
     }
 
-    public void setLoadId(int loadId) {
+    public void setLoadId(Integer loadId) {
         this.loadId = loadId;
     }
 

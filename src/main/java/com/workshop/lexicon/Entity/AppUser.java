@@ -1,4 +1,4 @@
-package Entity;
+package com.workshop.lexicon.Entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -6,13 +6,12 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "AppUser")
+@Table(name = "app_user")
 public class AppUser {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-    private int appUserId;
+    private Integer appUserId;
     @Column(unique = true)
     private String username;
     private String password;
@@ -21,14 +20,13 @@ public class AppUser {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name = "Details_detail_id")
+    @JoinColumn(name = "details_detail_id")
     private Details userDetails;
 
     public AppUser() {
     }
 
-    public AppUser(int appUserId, String username, String password, LocalDateTime localTime, Details userDetails) {
-        this.appUserId = appUserId;
+    public AppUser( String username, String password, LocalDateTime localTime, Details userDetails) {
         this.username = username;
         this.password = password;
         this.localTime = localTime;
@@ -41,7 +39,7 @@ public class AppUser {
      *
      * @return appUserId
      */
-    public int getAppUserId() {
+    public Integer getAppUserId() {
         return this.appUserId;
     }
 
@@ -50,7 +48,7 @@ public class AppUser {
      *
      * @param appUserId
      */
-    public void setAppUserId(int appUserId) {
+    public void setAppUserId(Integer appUserId) {
         this.appUserId = appUserId;
     }
 

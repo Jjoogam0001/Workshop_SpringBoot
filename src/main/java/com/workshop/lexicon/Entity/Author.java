@@ -1,9 +1,8 @@
-package Entity;
+package com.workshop.lexicon.Entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,8 +11,7 @@ import java.util.Set;
 public class Author {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private Integer authorId;
     @Column(length = 255)
@@ -27,7 +25,7 @@ public class Author {
     )
     @JoinTable(
             name = "author_has_book",
-            joinColumns = @JoinColumn(name = "author_AuthorId"),
+            joinColumns = @JoinColumn(name = "author_author_id"),
             inverseJoinColumns = @JoinColumn(name = "book_book_id")
     )
     private Set<Book> writtenBooks;
@@ -35,8 +33,8 @@ public class Author {
     public Author() {
     }
 
-    public Author(Integer authorId, String firstName, String lastName, Set<Book> writtenBooks) {
-        this.authorId = authorId;
+    public Author(String firstName, String lastName, Set<Book> writtenBooks) {
+
         this.firstName = firstName;
         LastName = lastName;
         this.writtenBooks = writtenBooks;
